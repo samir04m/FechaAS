@@ -16,70 +16,13 @@
 	<h1 id="resultado"></h1>
 	
 	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="fecha.js"></script>
 
 	<script type="text/javascript">
 
 		var ndias = {
 			1:31, 2:28, 3:31, 4:30, 5:31, 6:30, 7:31, 8:31, 9:30, 10:31, 11:30, 12:31
 		};
-
-		function Fecha(){
-
-			this.getDate = function () {
-				this.day = $('#day').val();
-				this.month = $('#month').val();
-				this.year = $('#year').val();
-			}
-
-			this.getDateLatin = function (){
-				return this.day+"/"+this.month+"/"+this.year;
-			};
-
-			this.getDateUS = function (){
-				return this.month+"/"+this.day+"/"+this.year;
-			};
-
-			this.getDay = function () {
-				return this.day;
-			};
-
-			this.getMonth = function () {
-				return this.month;
-			};
-
-			this.getYear = function () {
-				return this.year;
-			};
-
-			this.sumSevenDays = function () {
-
-			};
-
-			this.validateDate = function () {
-				if (this.month > 12 || this.month < 1) {
-					return "Fecha invalida";
-				}else{
-					if (this.isLeapYear()){
-						if (this.month == 2){
-							if (this.day > 29) return "Fecha invalida";
-						}else{
-							if (this.day > ndias[this.month] ) return "Fecha invalida";
-						}
-					}else {
-						if (this.day > ndias[this.month] ) {
-							return "Fecha invalida";
-						}
-					}
-				}
-				return "Fecha valida";
-			};
-
-			this.isLeapYear = function () {
-				if ( (this.year%4 == 0) && ((this.year%100 != 0) || (this.year%400 == 0)) ) return true;
-				return false;
-			};
-
-		}
 
 		var fecha = new Fecha();
 
