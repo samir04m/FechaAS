@@ -18,15 +18,15 @@
 			};
 
 			this.getDay = function () {
-				
+				return this.day;
 			};
 
 			this.getMonth = function () {
-				
+				return this.month;
 			};
 
 			this.getYear = function () {
-				
+				return this.year;
 			};
 
 			this.sumSevenDays = function () {
@@ -34,7 +34,22 @@
 			};
 
 			this.validateDate = function () {
-				
+				if (this.month > 12 || this.month < 1) {
+					return "Fecha invalida";
+				}else{
+					if (this.isLeapYear()){
+						if (this.month == 2){
+							if (this.day > 29) return "Fecha invalida";
+						}else{
+							if (this.day > ndias[this.month] ) return "Fecha invalida";
+						}
+					}else {
+						if (this.day > ndias[this.month] ) {
+							return "Fecha invalida";
+						}
+					}
+				}
+				return "Fecha valida";
 			};
 
 			this.isLeapYear = function () {
