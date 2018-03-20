@@ -1,20 +1,42 @@
-	<!DOCTYPE html>
-	<html lang="es">
-	<head>
-		<meta charset="UTF-8">
-		<title>Fechas</title>
-	</head>
-	<body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Fechas</title>
+</head>
+<body>
 
-		<script type="text/javascript">
+	<input type="number" id="day" placeholder="dia">
+	<input type="number" id="month" placeholder="mes">
+	<input type="number" id="year" placeholder="año">
+	<button id="validar">Validar Fecha</button>
+	<button id="fechaGringa">Obtener Fecha Gringa</button>
+	<button id="fechaLatina">Obtener Fecha latina</button>
+	<br>
+	<h1 id="resultado"></h1>
+	
+	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
 
-			function Fecha(day, month, year){
-			this.day = day;
-			this.month = month;
-			this.year = year;
+	<script type="text/javascript">
 
-			this.getDate = function (){
+		var ndias = {
+			1:31, 2:28, 3:31, 4:30, 5:31, 6:30, 7:31, 8:31, 9:30, 10:31, 11:30, 12:31
+		};
+
+		function Fecha(){
+
+			this.getDate = function () {
+				this.day = $('#day').val();
+				this.month = $('#month').val();
+				this.year = $('#year').val();
+			}
+
+			this.getDateLatin = function (){
 				return this.day+"/"+this.month+"/"+this.year;
+			};
+
+			this.getDateUS = function (){
+				return this.month+"/"+this.day+"/"+this.year;
 			};
 
 			this.getDay = function () {
@@ -56,9 +78,29 @@
 				if ( (this.year%4 == 0) && ((this.year%100 != 0) || (this.year%400 == 0)) ) return true;
 				return false;
 			};
+
 		}
 
-		</script>
+		var fecha = new Fecha();
+
+		$(function(){
+
+			$('#validar').click(function(){
+				fecha.getDate();
+				$('#resultado').text(fecha.validateDate());	
+			});
+			$('#fechaGringa').click(function(){
+				fecha.getDate();
+				$('#resultado').text(fecha.getDateUS());	
+			});
+			$('#fechaLatina').click(function(){
+				fecha.getDate();
+				$('#resultado').text(fecha.getDateLatin());	
+			});
+
+		});
+
+	</script>
 		
-	</body>
-	</html>
+</body>
+</html>
