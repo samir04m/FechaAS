@@ -14,7 +14,7 @@
 			this.year = year;
 
 			this.getDate = function (){
-		
+				return this.day+"/"+this.month+"/"+this.year;
 			};
 
 			this.getDay = function () {
@@ -38,7 +38,8 @@
 			};
 
 			this.isLeapYear = function () {
-				
+				if ( (this.year%4 == 0) && ((this.year%100 != 0) || (this.year%400 == 0)) ) return true;
+				return false;
 			};
 		}
 
