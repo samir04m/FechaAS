@@ -1,0 +1,33 @@
+body, nav, #panel-resultados {
+	transition: background 1s;
+}
+
+.btn-block {
+	width: 100%;
+}
+
+.panel-resultados {
+	min-height: 250px;
+	width: 100%;
+	border-radius: 12px;
+	transition: background 1s;
+	/*float: left;*/
+}
+
+.row2{
+	margin-bottom: 7px;
+}
+
+.btn-no-padding {
+	padding-left: 5px;
+	padding-right: 5px; 
+}
+
+.panel-simple {
+	width: 100%;
+	border-radius: 5px;
+	overflow: hidden;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+

@@ -2,21 +2,101 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Fechas</title>
-</head>
-<body>
 
-	<input type="number" id="day" placeholder="dia">
-	<input type="number" id="month" placeholder="mes">
-	<input type="number" id="year" placeholder="año">
-	<button id="validar">Validar Fecha</button>
-	<button id="fechaGringa">Obtener Fecha Gringa</button>
-	<button id="fechaLatina">Obtener Fecha latina</button>
-	<br>
-	<h1 id="resultado"></h1>
+	<link rel="stylesheet" href="css/materialize.css">
+	<link rel="stylesheet" href="css/material-icons.css">
+	<link rel="stylesheet" href="css/myStyles.css">
+	<script type="text/javascript" src="js/fontawesome-all.js"></script>
+
+</head>
+<body class="cyan darken-2">
+	<header>
+		<nav class="cyan darken-1" style="min-height: 120px !important;">
+			<div class="nav-wrapper" style="overflow: hidden;">
+					<h1 class="white-text center"><i class="far fa-calendar-alt"></i> Fecha</h1>
+			</div>
+		</nav>
+	</header><br>
+	<main>
+		<div class="container">
+			<div class="row">
+				<div class="col s12 offset-m1 m10 offset-l1 l10">
+					<div class="card-panel hoverable">
+						<div class="row">
+							<div class="col s12 m4">
+								<div class="input-field">
+									<input type="number" id="day" name="day">
+									<label for="day">Dia</label>
+								</div>
+							</div>
+							<div class="col s12 m4">
+								<div class="input-field">
+									<input type="number" id="month" name="month">
+									<label for="month">Mes</label>
+								</div>
+							</div>
+							<div class="col s12 m4">
+								<div class="input-field">
+									<input type="number" id="year" name="year">
+									<label for="year">Año</label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col s12 l4">
+								<div class="row2">
+									<button class="btn btn-block waves-effect waves-light cyan" id="validar">Validar Fecha</button>
+								</div>
+								<div class="row2">
+									<button class="btn btn-block waves-effect waves-light cyan darken-2" id="fechaGringa">Obtener Fecha Gringa</button>
+								</div>
+								<div class="row2">
+									<button class="btn btn-block waves-effect waves-light cyan darken-3" id="fechaLatina">Obtener Fecha latina</button>
+								</div>
+								<div class="row2">
+									<button class="btn btn-block waves-effect waves-light cyan darken-4" id="esBisiesto">Es bisiesto</button>
+								</div>
+								<div class="row2">
+									<div class="panel-simple grey lighten-2 z-depth-2">
+										<center>Obtener</center>
+										<div class="row">
+											<div class="col s4">
+												<button class="btn btn-block btn-no-padding waves-effect waves-light cyan" id="getDay">Dia</button>
+											</div>
+											<div class="col s4">
+												<button class="btn btn-block btn-no-padding waves-effect waves-light blue" id="getMonth">Mes</button>
+											</div>
+											<div class="col s4">
+												<button class="btn btn-block btn-no-padding waves-effect waves-light teal" id="getYear">Año</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+							</div>
+							<div class="col s12 l8">
+								<div class="panel-resultados grey lighten-2 valign-wrapper z-depth-1" id="panel-resultados">
+									<div class="center" style="width: 100%;">
+										<h1 id="resultado" class="truncate"></h1>
+									</div>
+									
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<footer></footer>
+
 	
-	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="fecha.js"></script>
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<script type="text/javascript" src="js/fecha.js"></script>
 
 	<script type="text/javascript">
 
@@ -27,21 +107,65 @@
 		var fecha = new Fecha();
 
 		$(function(){
+			var d = new Date();
+
+			$('#day').val(d.getDate());
+			$('#month').val(d.getMonth()+1);
+			$('#year').val(d.getFullYear());
+
+			$('button').click(function(){
+				fecha.getDate();
+				changeBackgroundColor();
+			});
+
+			$('button').mouseover(function(){
+				$(this).addClass('pulse');
+			});
+			$('button').mouseout(function(){
+				$(this).removeClass('pulse');
+			});
 
 			$('#validar').click(function(){
-				fecha.getDate();
 				$('#resultado').text(fecha.validateDate());	
 			});
 			$('#fechaGringa').click(function(){
-				fecha.getDate();
 				$('#resultado').text(fecha.getDateUS());	
 			});
 			$('#fechaLatina').click(function(){
-				fecha.getDate();
 				$('#resultado').text(fecha.getDateLatin());	
 			});
+			$('#esBisiesto').click(function(){
+				if (fecha.isLeapYear()) $('#resultado').text("Año Bisiesto");	
+				else $('#resultado').text("Año No Bisiesto");	
+			});
+			$('#getDay').click(function(){
+				$('#resultado').text(fecha.getDay());	
+			});
+			$('#getMonth').click(function(){
+				$('#resultado').text(fecha.getMonth());	
+			});
+			$('#getYear').click(function(){
+				$('#resultado').text(fecha.getYear());	
+			});
+
 
 		});
+
+		var colorIndex = 1; 
+
+		var colors = [
+			"cyan darken-2", "blue darken-2", "blue darken-4", "purple darken-3",  "purple", "red darken-1", "red", "orange lighten-1",  "orange darken-2", "yellow darken-2", "green", "green darken-2", "teal darken-3"
+		]
+
+		function changeBackgroundColor(){
+
+			if (colorIndex > colors.length-1) colorIndex = 0;
+
+			document.getElementsByTagName("body")[0].setAttribute("class", colors[colorIndex]);
+			document.getElementsByTagName("nav")[0].setAttribute("class", "nav-wrapper "+colors[colorIndex]);
+			colorIndex = colorIndex + 1;
+
+		}
 
 	</script>
 		
